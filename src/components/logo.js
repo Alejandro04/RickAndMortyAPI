@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import logo from '../houmLogo.svg';
 
 const styles = {
   logo: {
@@ -13,7 +14,7 @@ class Logo extends Component {
 
     return (
       <div style={styles.logo}>
-        Test for Houm
+       <img src={logo} className="App-logo" alt="logo" />
       </div>
     )
   }
