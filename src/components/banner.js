@@ -9,7 +9,8 @@ const styles = {
   },
   title: {
     margin: 'auto',
-    lineHeight: '250px'
+    lineHeight: '250px',
+    color: '#424242'
   }
 }
 

@@ -5,7 +5,7 @@ class Characters extends Component {
   render() {
     const { characters } = this.props;  
     return (
-      <div className="productsContainer">
+      <div className="charactersContainer">
         {characters.length > 0 && characters.map(ch =>
           <Character
             key={ch.id}

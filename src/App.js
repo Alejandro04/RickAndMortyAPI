@@ -10,6 +10,7 @@ import Loader from "react-loader-spinner";
 const styles = {
   autocomplete: {
     margin: 'auto',
+    borderRadius: '50px'
   },
   dropdowsContainer: {
     display: 'flex',
@@ -28,7 +29,14 @@ const styles = {
     fontWeight: 'bold'
   },
   nextBtn: {
-    marginLeft: '10px'
+    marginLeft: '10px',
+    color: '#FF452B'
+  },
+  prevBtn: {
+    color: '#FF452B'
+  },
+  textField: {
+    color:'#424242'
   }
 }
 
@@ -73,15 +81,15 @@ class App extends Component {
 
   Paginate = (value) => {
     if (value === 'next') {
-      this.setState({  page: this.state.page + 1, prevFlag: true }, () => {
+      this.setState({ page: this.state.page + 1, prevFlag: true }, () => {
         this.getAllCharacters();
-      }); 
+      });
     }
     if (value === 'prev') {
       if (this.state.page > 1) {
         this.setState({ page: this.state.page - 1 }, () => {
           this.getAllCharacters();
-        }); 
+        });
       }
 
       if (this.state.page === 1) {
@@ -108,7 +116,11 @@ class App extends Component {
               sx={{ width: 400 }}
               onChange={this.onChangeCharacters}
               getOptionLabel={(option) => `${option.name}`}
-              renderInput={(params) => <TextField {...params} label="Search for name" />}
+              renderInput={(params) =>
+                <TextField {...params}
+                  placeholder="Search for name"
+                  style={styles.textField}
+                />}
             />
           </div>
           {
@@ -131,7 +143,7 @@ class App extends Component {
           }
           <div style={styles.actionsContainer}>
             {this.state.prevFlag &&
-              <div onClick={() => this.Paginate('prev')}>
+              <div onClick={() => this.Paginate('prev')} style={styles.prevBtn}>
                 Prev
               </div>
             }

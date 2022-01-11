@@ -13,12 +13,14 @@ const styles = {
   },
   details:  {
     padding: 0,
-    margin: 0
+    margin: 0,
+    color: '#263238'
   },
   description: {
     fontWeight: 'bold',
     fontSize: '18px',
-    marginTop: '5px'
+    marginTop: '5px',
+    color: '#263238'
   }
 }
 
