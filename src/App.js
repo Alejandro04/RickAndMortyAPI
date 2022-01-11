@@ -19,6 +19,16 @@ const styles = {
     margin: 'auto',
     textAlign: 'center',
     marginTop: '40px'
+  },
+  actionsContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    padding: '40px',
+    fontSize: '20px',
+    fontWeight: 'bold'
+  },
+  nextBtn: {
+    marginLeft: '10px'
   }
 }
 
@@ -26,7 +36,10 @@ const styles = {
 class App extends Component {
   state = {
     characters: [],
-    spinner: true
+    spinner: true,
+    nextFlag: true,
+    prevFlag: false,
+    page: 1
   }
 
   async componentDidMount() {
@@ -34,7 +47,7 @@ class App extends Component {
   }
 
   async getAllCharacters() {
-    const response = await fetch(`https://rickandmortyapi.com/api/character`);
+    const response = await fetch(`https://rickandmortyapi.com/api/character/?page=${this.state.page}`);
     const json = await response.json();
     this.setState({ characters: json.results, spinner: false });
   }
@@ -56,6 +69,27 @@ class App extends Component {
     setTimeout(() => {
       this.setState({ characters: json, spinner: false });
     }, 1000);
+  }
+
+  Paginate = (value) => {
+    if (value === 'next') {
+      this.setState({  page: this.state.page + 1, prevFlag: true }, () => {
+        this.getAllCharacters();
+      }); 
+    }
+    if (value === 'prev') {
+      if (this.state.page > 1) {
+        this.setState({ page: this.state.page - 1 }, () => {
+          this.getAllCharacters();
+        }); 
+      }
+
+      if (this.state.page === 1) {
+        this.setState({ prevFlag: false })
+      }
+    }
+
+    this.getAllCharacters();
   }
 
   render() {
@@ -95,6 +129,18 @@ class App extends Component {
               characters={this.state.characters}
             />
           }
+          <div style={styles.actionsContainer}>
+            {this.state.prevFlag &&
+              <div onClick={() => this.Paginate('prev')}>
+                Prev
+              </div>
+            }
+            {this.state.nextFlag &&
+              <div onClick={() => this.Paginate('next')} style={styles.nextBtn}>
+                Next
+              </div>
+            }
+          </div>
         </Layout>
       </div>
     )
