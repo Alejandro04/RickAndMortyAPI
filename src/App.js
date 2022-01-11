@@ -50,7 +50,7 @@ class App extends Component {
     page: 1
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     this.getAllCharacters();
   }
 
