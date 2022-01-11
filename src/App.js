@@ -96,8 +96,6 @@ class App extends Component {
         this.setState({ prevFlag: false })
       }
     }
-
-    this.getAllCharacters();
   }
 
   render() {
